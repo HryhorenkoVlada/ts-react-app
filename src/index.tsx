@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
 import App from './App';
+import { createMirageServer } from './server/server';
 
 import './index.scss';
 import { store } from './redux/store';
@@ -10,6 +11,9 @@ import { store } from './redux/store';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+createMirageServer({ environment: 'development' });
+
 root.render(
   <Provider store={store}>
     <App />

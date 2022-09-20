@@ -1,6 +1,6 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import peopleReducer from './peopleReducer'
+import productsReducer from './productsReducer'
 
 export const rootReducer = combineReducers({
-  people: peopleReducer
+  products: productsReducer
 })
