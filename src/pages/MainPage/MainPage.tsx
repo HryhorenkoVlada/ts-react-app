@@ -16,6 +16,17 @@ const MainPage: FunctionComponent<MainPageProps> = () => {
     setCurrentPage(value);
   };
 
+  interface Col {
+    title: string;
+    value: keyof IPerson;
+  }
+
+  const columns: Col[] = [
+    { title: 'Name', value: 'name' },
+    { title: 'Birth Year', value: 'birth_year' },
+    { title: 'Gender', value: 'gender' },
+  ];
+
   const data: IPerson[] = [
     { name: 'John', birth_year: '1999', gender: 'male' },
     { name: 'John', birth_year: '1999', gender: 'male' },
@@ -24,7 +35,7 @@ const MainPage: FunctionComponent<MainPageProps> = () => {
   ];
   return (
     <div className="p-10">
-      <DataTable data={data} page={currentPage} />
+      <DataTable<IPerson> data={data} page={currentPage} columns={columns} />
       <PaginationBlock
         page={currentPage}
         totalPages={9}

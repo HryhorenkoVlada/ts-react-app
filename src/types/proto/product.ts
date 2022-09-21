@@ -8,7 +8,7 @@ export interface IProduct {
   year: number
   seller: string
   labels: string[]
-  image?: File
+  image?: string
   description: string
   color: string
 }
