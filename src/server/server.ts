@@ -33,6 +33,12 @@ export const createMirageServer = ({ environment = 'test' }) => {
       this.get('/products', (schema: any) => {
         return schema.products.all()
       })
+
+      this.get('/products/:id', (schema: any, request) => {
+        let id = request.params.id
+
+        return schema.products.find(id)
+      })
     },
 
   })

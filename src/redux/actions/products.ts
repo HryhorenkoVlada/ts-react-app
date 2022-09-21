@@ -10,7 +10,7 @@ export const fetchProducts = (): ThunkAction<void, RootState, unknown, AnyAction
   return async (dispatch) => {
     try {
       dispatch(getProducts())
-      const response = await get('/products', {})
+      const response = await get('/products')
       const data: ProductsIndexRO = response.data
       console.log(data.products)
       dispatch(getProductsSuccess(data.products))
