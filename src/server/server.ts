@@ -39,6 +39,16 @@ export const createMirageServer = ({ environment = 'test' }) => {
 
         return schema.products.find(id)
       })
+
+      this.put('/products/:id', (schema: any, request) => {
+        let id = request.params.id
+        const attrs = JSON.parse(request.requestBody)
+
+        const updatedProduct = schema.products.find(id)
+        updatedProduct.update(attrs)
+
+        return updatedProduct
+      })
     },
 
   })

@@ -1,6 +1,4 @@
-export interface IProduct {
-  // TODO: change id to number
-  id: string
+export interface ProductCreateDTO {
   name: string
   description: string
   price: number

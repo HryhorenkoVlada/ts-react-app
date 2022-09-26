@@ -7,6 +7,8 @@ import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useAppDispatch } from '../../hooks/redux';
 import { fetchProducts } from '../../redux/actions/products';
 import ProductsGridView from '../../components/ProductsGridView/ProductsGridView';
+import { useQueryClient } from '@tanstack/react-query';
+import { useProducts } from '../../hooks/useProducts';
 
 interface ProductsPageProps {}
 
@@ -14,9 +16,9 @@ const ProductsPage: FunctionComponent<ProductsPageProps> = () => {
   const [view, setView] = React.useState('grid');
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchProducts());
+  // }, []);
 
   const handleChange = (
     event: React.MouseEvent<HTMLElement>,

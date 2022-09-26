@@ -1,0 +1,38 @@
+.text-input {
+  display: block;
+  transition: all 0.3s ease-in;
+  margin-bottom: 12px;
+  &:focus-within {
+    label {
+      transition: all 0.3s ease-in;
+      color: #8a7090;
+    }
+  }
+
+  &__input {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    border: none;
+    border-bottom: 2px solid #9a9a9a;
+    transition: all 0.3s ease-in;
+    &:disabled {
+      background-color: transparent;
+    }
+    &:focus {
+      outline: none;
+      border-color: #8a7090;
+    }
+    &_invalid {
+      border-color: #be2832;
+    }
+  }
+  &__label {
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #9a9a9a;
+    &_invalid {
+      color: #be2832;
+    }
+  }
+}

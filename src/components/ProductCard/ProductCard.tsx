@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import { IProduct } from '../../types/proto/product';
 import { NoImage } from '../../assets/images';
+import { Link } from 'react-router-dom';
 
 interface ProductCardProps {
   product: IProduct;
@@ -8,7 +9,10 @@ interface ProductCardProps {
 
 const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
   return (
-    <div className="rounded-lg shadow-md overflow-hidden">
+    <Link
+      to={`/products/${product?.id}`}
+      className="rounded-lg shadow-md overflow-hidden"
+    >
       <div className="product-card__img-wrapper">
         {product?.image ? (
           <img src={product?.image} alt="product_img" />
@@ -25,7 +29,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

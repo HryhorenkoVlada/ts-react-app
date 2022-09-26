@@ -64,8 +64,13 @@ const post = (
   service = httpService
 ) => service.post(url, payload, config)
 
-const put: serviceRequest = (url, service = httpService, config) =>
-  service.put(url, config)
+const put = (
+  url: string,
+  payload?: any,
+  config: AxiosRequestConfig = {},
+  service = httpService
+) => service.put(url, payload, config)
+
 const httpDelete: serviceRequest = (url, service = httpService, config) =>
   service.delete(url, config)
 
