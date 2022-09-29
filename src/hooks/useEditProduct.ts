@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
+
 import { IProduct } from "../types/proto/product";
 import { put } from "../utils/api";
 
@@ -10,16 +11,16 @@ export const useEditProduct = () => {
       .then((res) => res.data.product as IProduct),
     {
       // optimistic updates
-      onMutate: async updatedProduct => {
-        await queryClient.cancelQueries(['products', updatedProduct.id])
-        const previousProduct: IProduct | undefined = queryClient.getQueryData(['products', updatedProduct.id])
-        queryClient.setQueryData(['products', updatedProduct.id], updatedProduct)
-        return { previousProduct, updatedProduct }
-      },
+      // onMutate: async updatedProduct => {
+      //   await queryClient.cancelQueries(['products', updatedProduct.id])
+      //   const previousProduct: IProduct | undefined = queryClient.getQueryData(['products', updatedProduct.id])
+      //   queryClient.setQueryData(['products', updatedProduct.id], updatedProduct)
+      //   return { previousProduct, updatedProduct }
+      // },
       onSuccess: (product) => {
-        queryClient.invalidateQueries(['products', product.id])
+        queryClient.invalidateQueries(['products', product?.id])
       },
-      onError: (err, updatedProduct, context) => {
+      onError: (err, updatedProduct, context: any) => {
         queryClient.setQueryData(
           ['products', context?.updatedProduct.id],
           context?.previousProduct

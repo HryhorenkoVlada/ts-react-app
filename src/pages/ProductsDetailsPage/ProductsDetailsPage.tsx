@@ -1,8 +1,10 @@
 import React, { FunctionComponent } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import CircularLoader from '../../components/shared/CircularLoader/CircularLoader';
 import { useProduct } from '../../hooks/useProduct';
+import { NoImage } from '../../assets/images';
 
 interface ProductsDetailsPageProps {}
 
@@ -14,11 +16,26 @@ const ProductsDetailsPage: FunctionComponent<ProductsDetailsPageProps> = () => {
     <div className="p-10">
       {isLoading ? (
         <CircularLoader />
-      ) : (
+      ) : data ? (
         <>
+          <Link to={`/products`} className="inline-block mb-4">
+            <ArrowBackIcon sx={{ width: 24, height: 24 }} color="primary" />
+          </Link>
           <div className="flex items-start">
             <div className="shrink-0 w-2/6 rounded-lg shadow-md overflow-hidden">
-              <img src={data?.image} alt="product_img" />
+              {data?.image ? (
+                <img
+                  src={data.image}
+                  alt="product_img"
+                  className="w-full sm:h-40 object-cover h-full"
+                />
+              ) : (
+                <img
+                  src={NoImage}
+                  alt="product_img"
+                  className="w-full sm:h-40 object-cover h-full"
+                />
+              )}
             </div>
             <div className="flex-1 ml-4">
               <h1 className="text-2xl font-bold text-gray-800 mb-4">
@@ -62,6 +79,8 @@ const ProductsDetailsPage: FunctionComponent<ProductsDetailsPageProps> = () => {
             </Link>
           </div>
         </>
+      ) : (
+        <Navigate to="/products" />
       )}
     </div>
   );

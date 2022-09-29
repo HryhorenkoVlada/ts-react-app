@@ -1,23 +1,20 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { v4 as uuidv4 } from 'uuid';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 import InputField from '../../components/shared/InputField/InputField';
-import { useProduct } from '../../hooks/useProduct';
-import { useEditProduct } from '../../hooks/useEditProduct';
-import { IProduct } from '../../types/proto/product';
+import { ProductCreateDTO } from '../../types/proto/dto/products/create';
+import { useCreateProduct } from '../../hooks/useCreateProduct';
 
-interface EditProductPageProps {}
+interface CreateProductPageProps {}
 
-const EditProductPage: FunctionComponent<EditProductPageProps> = () => {
-  const { productId } = useParams();
-  const { data, error } = useProduct(productId ?? '');
-  const { mutate } = useEditProduct();
-  const [initialState, setInitialState] = useState<IProduct>({
-    id: uuidv4(),
+const CreateProductPage: FunctionComponent<CreateProductPageProps> = () => {
+  const { mutate } = useCreateProduct();
+  const navigate = useNavigate();
+
+  const initialState: ProductCreateDTO = {
     name: '',
     price: 0,
     manufacturer: '',
@@ -26,24 +23,7 @@ const EditProductPage: FunctionComponent<EditProductPageProps> = () => {
     seller: '',
     description: '',
     color: '',
-  });
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (data) {
-      setInitialState({
-        id: data.id,
-        name: data.name,
-        price: data.price,
-        manufacturer: data.manufacturer,
-        product_material: data.product_material,
-        year: data.year,
-        seller: data.seller,
-        description: data.description,
-        color: data.color,
-      });
-    }
-  }, [data]);
+  };
 
   const validationSchema = () =>
     Yup.object().shape({
@@ -58,18 +38,20 @@ const EditProductPage: FunctionComponent<EditProductPageProps> = () => {
       year: Yup.number().required('Required'),
     });
 
-  const handleEditFormSubmit = (data: IProduct) => {
+  const handleEditFormSubmit = (data: ProductCreateDTO) => {
+    console.log('mutate');
     mutate(data);
-    navigate(`/products/${productId}`);
+    navigate(`/products`);
   };
 
-  return error || !productId ? (
-    <Navigate to="/products" />
-  ) : (
+  return (
     <div className="p-10">
-      <Link to={`/products/${productId}`} className="inline-block mb-4">
+      <Link to={`/products`} className="inline-block mb-3">
         <ArrowBackIcon sx={{ width: 24, height: 24 }} color="primary" />
       </Link>
+      <h1 className="text-2xl text-gray-800 font-bold text-center mb-2">
+        Create a product
+      </h1>
       <Formik
         initialValues={initialState}
         validationSchema={validationSchema}
@@ -133,4 +115,4 @@ const EditProductPage: FunctionComponent<EditProductPageProps> = () => {
   );
 };
 
-export default EditProductPage;
+export default CreateProductPage;

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './App.scss';
+import CreateProductPage from './pages/CreateProductPage/CreateProductPage';
 import EditProductPage from './pages/EditProductPage/EditProductPage';
 import MainPage from './pages/MainPage/MainPage';
 import ProductsDetailsPage from './pages/ProductsDetailsPage/ProductsDetailsPage';
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />}></Route>
         <Route path="/products" element={<ProductsPage />} />
+        <Route path="/products/create" element={<CreateProductPage />} />
         <Route path="/products/:productId" element={<ProductsDetailsPage />} />
         <Route path="/products/:productId/edit" element={<EditProductPage />} />
       </Routes>

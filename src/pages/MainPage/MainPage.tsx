@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
+
 import DataTable from '../../components/DataTable/DataTable';
 import PaginationBlock from '../../components/shared/Pagination/Pagination';
-
 import { IPerson } from '../../types/interfaces/person';
 
 interface MainPageProps {}
